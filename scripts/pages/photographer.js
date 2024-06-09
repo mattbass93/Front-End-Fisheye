@@ -67,14 +67,6 @@ await getPhotographers().then((resultat) => {
 });
 
 
-
-let mediaItems = []
-
-
-
-
-
-
 function displayMediaItem(mediaItem, photographersAndMedia) {
     const photographGallery = document.querySelector('.photographer_gallery');
     const cardPicture = createElementWithClass("div", "card_picture");
@@ -109,9 +101,10 @@ function displayMediaItem(mediaItem, photographersAndMedia) {
     likes.setAttribute("tabindex", 0)
     likes.setAttribute("aria-label", "likes")
 
+
     let nbrOfLikes = createElementWithClass("span", "nbrOfLikes", mediaItem.likes);
 
-    const likesLogo = createImageElement("/assets/icons/like.png", "likes_logo");
+    const likesLogo = createImageElement("./assets/icons/like.png", "likes_logo");
     likesLogo.setAttribute("alt", "likes")
     likesLogo.addEventListener('click', () => {
         nbrOfLikes.textContent = parseInt(nbrOfLikes.textContent) + 1;

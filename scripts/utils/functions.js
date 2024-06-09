@@ -13,7 +13,7 @@ export function photographerTemplate(data) {
 
     function getUserCardDOM() {
         const link = document.createElement('a')
-        link.href = `../photographer.html?id=${id}`
+        link.href = `./photographer.html?id=${id}`
         link.setAttribute("tabindex", 0)
 
         const article = document.createElement('article');
@@ -130,7 +130,7 @@ export function updateTotalNbrOfLikes() {
     let totalNbrOfLikesElement = document.createElement('span');
     totalNbrOfLikesElement.textContent = countNbrOfLikes;
 
-    const likesLogo2 = createImageElement("/assets/icons/like.png", "likes-logo");
+    const likesLogo2 = createImageElement("./assets/icons/like.png", "likes-logo");
 
     // Remplacez le contenu existant de totalLikes
     totalLikes.innerHTML = '';

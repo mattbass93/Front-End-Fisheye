@@ -1,8 +1,6 @@
 import { getPhotographers, isCurrentUrlMatch } from "./functions.js";
 
 
-let photographersAndMedia = ""
-
 getPhotographers().then((photographersAndMedia) => {
     const currentUrl = window.location.href;
 

@@ -18,7 +18,7 @@ export function setupEventListeners() {
     })
 
     sortButton.addEventListener("click", () => {
-        sortImage.src = "/assets/icons/down.png"
+        sortImage.src = "./assets/icons/down.png"
 
         sortSpanInactive.forEach(function (span) {
             span.classList.remove("inactive");
