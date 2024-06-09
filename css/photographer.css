@@ -1,6 +1,14 @@
-#contact_modal {
-    display: none;
+#contact_modal, .media_modal {
+     display: none;
+    width: 100%;
+    position: fixed;
+    inset: 0;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(229, 230, 237, 0.8);
+   
 }
+
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -19,6 +27,11 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    
+}
+
+form > div > input {
+    font-size: 1.5em;
 }
 
 .modal {
@@ -31,11 +44,77 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    max-height: 900px;
+    margin-top: 10px;
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+}
+
+.media_zoom {
+    width: 1050px;
+    height: 860px;
+    background: red;
+    margin: auto;
+    margin-top: 10px;
+    object-fit: cover;
+}
+
+.modal2 {
+    margin: auto;
+    margin-top: 10px;
+    width: 1242px;
+    height: 920px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#left, #right {
+    width: 96px;
+    height: 96px;
+    cursor: pointer;
+}
+
+#left {
+    order: -1;
+}
+
+.media_zoom_name {
+    position: absolute;
+    bottom: 15px;
+    left: 97px;
+    font-size: 1.5em;
+    color: #901C1C
+}
+
+#close_media_zoom {
+    width: 72px;
+    height: 72px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.close_and_right {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 118px;
+
+}
+
+.modal header span {
+    font-size: 64px;
+    font-weight: normal;
+
 }
 
 .modal header img {
@@ -43,9 +122,15 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 60px;
     font-weight: normal;
-    text-align: center;
+    margin: 0;
+    /* margin-right: 141px;
+    width: 80% */
+}
+
+.modal {
+    position: relative;
 }
 
 form {
@@ -53,6 +138,7 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 65px;
 }
 
 form label {
@@ -65,7 +151,6 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
 }
 
 form input {
@@ -74,3 +159,190 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+#message {
+    height: 170px;
+    margin-bottom: 20px;
+}
+
+.contact_button {
+    order: 1
+}
+
+.close_modal {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+@keyframes modalopen {
+    from {
+      opacity: 0;
+      transform: translateY(-150px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+/* .photograph_infos {
+    width: 34%;
+} */
+
+.photographer_name {
+    font-size: 4em;
+    margin-bottom: 0;
+    margin-right: 0;
+}
+
+.photographer_localisation {
+    font-size: 1.5em;
+    color: #901C1C;
+    margin-top: 0;
+}
+
+.photographer_tagline {
+    font-size: 1.1em;
+    color: #525252;
+    margin-top: 0;
+}
+
+.profil_picture {
+    width: 200px;
+    height: 200px;
+    order: 2;
+    color: #D3573C;
+}
+
+.photograph-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+
+.tri {
+    gap: 1em;
+    margin-left:100px;
+    font-weight: bold;
+    top: 400px;
+}
+
+
+
+.sort_span {
+    font-size: 1.4em;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.sort_section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2em;
+    border-top: 1px solid white;
+    background: #901C1C;
+}
+
+#sort_section1 {
+    border-top: none;
+}
+
+.sort_button {
+    width: 170px;
+    flex-direction: column;
+    display: flex;
+    border-radius: 5px;
+    cursor: pointer; 
+    border: none;
+   position: absolute;
+   top: 400px;
+   left: 180px
+}
+
+
+
+
+ .inactive {
+    display: none;
+ }
+     
+ 
+
+
+.photographer_gallery {
+    margin: 0 100px;
+    margin-top: 60px;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1em
+}
+
+
+
+.picture_gallery {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.card_picture {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 350px;
+}
+
+
+.picture_title_and_likes {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    color: #901C1C;
+    font-weight: normal
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+}
+
+.likes > span {
+    margin-right: 5px;
+}
+
+
+.total_likes_and_daily_rate {
+    width: 376px;
+    height: 67px;
+    background: #DB8876;
+    position: fixed;
+    right: 10px;
+    bottom: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.total_likes {
+    display: flex;
+    align-items: center;
+}
+
+.daily_rate, .total_likes {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+

@@ -1,9 +1,68 @@
+import { getPhotographers, isCurrentUrlMatch } from "./functions.js";
+
+
+let photographersAndMedia = ""
+
+getPhotographers().then((photographersAndMedia) => {
+    const currentUrl = window.location.href;
+
+    for (const photographer of photographersAndMedia.photographers) {
+        if (isCurrentUrlMatch(currentUrl, photographer.id)) {
+            const name = document.createElement("span")
+            h2Form.textContent = `Contactez moi ${photographer.name}`;
+            // header.appendChild(name)
+        }
+    }
+});
+
+const header = document.getElementById("modal_header")
+const h2Form = document.querySelector("h2")
+// h2Form.setAttribute("tabindex", 0)
+// h2Form.focus()
+
+
+const firstname = document.getElementById('firstname')
+const lastname = document.getElementById('lastname')
+const email = document.getElementById('email')
+const message = document.getElementById('message')
+
+const form = document.querySelector('form')
+
+const modal = document.getElementById("modal")
+
+
+
 function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+    const contactModal = document.getElementById("contact_modal");
+    contactModal.style.display = "block";
+    modal.setAttribute("tabindex", 0)
+    modal.focus()
 }
 
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+    const contactModal = document.getElementById("contact_modal");
+    contactModal.style.display = "none";
 }
+
+const contactButton = document.querySelector(".contact_button")
+
+contactButton.addEventListener("click", () => {
+    displayModal()
+})
+
+const spanCloseModal = document.querySelector(".close_modal")
+
+spanCloseModal.addEventListener("click", () => {
+    closeModal()
+})
+
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault()
+
+    console.log(`Prénom : ${firstname.value}`)
+    console.log(`Nom : ${lastname.value}`)
+    console.log(`Email : ${email.value}`)
+    console.log(`Message : ${message.value}`)
+
+})
