@@ -8,27 +8,18 @@ getPhotographers().then((photographersAndMedia) => {
         if (isCurrentUrlMatch(currentUrl, photographer.id)) {
             const name = document.createElement("span")
             h2Form.textContent = `Contactez moi ${photographer.name}`;
-            // header.appendChild(name)
         }
     }
 });
 
 const header = document.getElementById("modal_header")
 const h2Form = document.querySelector("h2")
-// h2Form.setAttribute("tabindex", 0)
-// h2Form.focus()
-
-
 const firstname = document.getElementById('firstname')
 const lastname = document.getElementById('lastname')
 const email = document.getElementById('email')
 const message = document.getElementById('message')
-
 const form = document.querySelector('form')
-
 const modal = document.getElementById("modal")
-
-
 
 function displayModal() {
     const contactModal = document.getElementById("contact_modal");
@@ -53,6 +44,13 @@ const spanCloseModal = document.querySelector(".close_modal")
 spanCloseModal.addEventListener("click", () => {
     closeModal()
 })
+
+spanCloseModal.addEventListener('keyup', function (event) {
+    if (event.key === ' ' || event.key === "Enter") {
+        closeModal()
+    }
+});
+
 
 
 form.addEventListener("submit", (event) => {

@@ -17,7 +17,7 @@
     <main id="main">
       <div class="photograph-header">
         
-        <button class="contact_button" alt="Contact Me">Contactez-moi</button>
+        <button class="contact_button link" alt="Contact Me">Contactez-moi</button>
       </div>
 
       <div class="total_likes_and_daily_rate" tabindex="0">
@@ -27,17 +27,11 @@
 
       <div class="tri">
         <span tabindex="0" class="">Trier par</span>       
-          <button class="sort_button">
-            <div class="sort_section" id="sort_section1">
-              <span class="sort_span active" id="popularity">Popularité</span>
-              <img class="sort_image" src="assets/icons/up.png">
-            </div>
-            <div class="sort_section inactive">
-              <span class="sort_span" id="date">Date</span>
-            </div>
-            <div class="sort_section inactive">
-              <span class="sort_span" id="alphabet">Titre</span>
-            </div>
+          <button class="sort_button">   
+              <span tabindex="0" class="sort_section active link" id="popularity">Popularité</span>
+              <span tabindex="0" class="sort_section inactive link" id="date">Date</span>
+              <span tabindex="0" class="sort_section inactive link" id="alphabet">Titre</span>
+              <img  tabindex="0" class="sort_image" src="assets/icons/up.png">
           </button>      
       </div>
       <div class="photographer_gallery">        
@@ -70,16 +64,15 @@
 						<input id="message" type="text" name="message"></input>
 					</div>
           <button class="contact_button" type="submit">Envoyer</button>
-          ><img tabindex="0" class="close_modal"  src="assets/icons/close.svg" />
-          
+          <img tabindex="0" class="close_modal"  src="assets/icons/close.svg" />      
 				</form>
 			</div>
 		</div>
 
     <div class="media_modal">
       <div tabindex="0" class="modal2" aria-label="image closeup view">
-        <img tabindex="0"  class="media_zoom"></img>
-        <span tabindex="0"  class="media_zoom_name">Name</span>
+        <!-- <img tabindex="0"  class="media_zoom"></img> -->
+      <!-- <span tabindex="0"  class="media_zoom_name">Name</span> -->
         <img tabindex="0"  id="left" src="assets/icons/left.png" alt="Previous image"/>
         <img tabindex="0"  id="right" src="assets/icons/right.png" alt="Next image"/>
         <img tabindex="0"  id="close_media_zoom" src="assets/icons/close_media_zoom.png" alt="Close dialog"/>
