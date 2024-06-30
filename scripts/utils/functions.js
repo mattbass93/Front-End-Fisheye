@@ -104,14 +104,9 @@ export function checkIfExistingAndRemove(element) {
 export function displayMediaItem(mediaItem, photographersAndMedia) {
     const photographGallery = document.querySelector('.photographer_gallery');
     const cardPicture = createElementWithClass("div", "card_picture");
-
     const associatedPhotographer = photographersAndMedia.photographers.find(photographer => photographer.id === mediaItem.photographerId);
-
     const picturePath = `Sample Photos/${getFolderName(associatedPhotographer.name)}/${mediaItem.image}`;
-
     const videoPath = `Sample Photos/${getFolderName(associatedPhotographer.name)}/${mediaItem.video}`;
-
-
 
     let mediaElement;
 
@@ -122,8 +117,6 @@ export function displayMediaItem(mediaItem, photographersAndMedia) {
         mediaElement = new Image(picturePath, mediaItem.title);
 
     }
-
-    const nextMedia = document.getElementById('right')
 
     if (mediaElement) {
         const mediaElementHtml = mediaElement.render();
@@ -139,6 +132,20 @@ export function displayMediaItem(mediaItem, photographersAndMedia) {
             const mediaZoomName = mediaElement.renderNameForLightbox()
             modal2.prepend(mediaZoomName)
             modal2.prepend(mediaZoom)
+        })
+
+        mediaElementHtml.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                checkIfExistingAndRemove(".media_zoom")
+                checkIfExistingAndRemove(".media_zoom_name")
+
+                const modal2 = document.querySelector('.modal2')
+                const mediaZoom = mediaElement.renderForLightbox();
+                const mediaZoomName = mediaElement.renderNameForLightbox()
+                modal2.prepend(mediaZoomName)
+                modal2.prepend(mediaZoom)
+            }
+
         })
     }
 
@@ -157,7 +164,13 @@ export function displayMediaItem(mediaItem, photographersAndMedia) {
     likesLogo.addEventListener('click', () => {
         nbrOfLikes.textContent = parseInt(nbrOfLikes.textContent) + 1;
         updateTotalNbrOfLikes()
+    })
 
+    likes.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            nbrOfLikes.textContent = parseInt(nbrOfLikes.textContent) + 1;
+            updateTotalNbrOfLikes()
+        }
     })
 
     likes.appendChild(nbrOfLikes);
@@ -166,7 +179,6 @@ export function displayMediaItem(mediaItem, photographersAndMedia) {
     description.appendChild(pictureTitle);
     description.appendChild(likes);
     photographGallery.appendChild(cardPicture);
-
 
 }
 
@@ -197,22 +209,28 @@ export function getFolderName(folderName) {
 export function openMediaModal() {
     const mediaModal = document.querySelector(".media_modal");
     mediaModal.style.display = "block";
+
 }
 
 
-document.querySelectorAll('.card_picture').forEach(card => {
-    card.addEventListener('click', event => {
-        openMediaModal(event.target);
-    });
-});
 
 
-export function swipeMedia(imageSrc, mediaTitle) {
-    const mediaZoom = document.querySelector('.media_zoom')
-    mediaZoom.src = imageSrc;
-    mediaZoom.setAttribute("alt", mediaTitle)
-    const mediaZoomTitle = document.querySelector('.media_zoom_name')
-    mediaZoomTitle.textContent = mediaTitle
+export function swipeMedia(mediaSrc, mediaTitle) {
+    checkIfExistingAndRemove('.media_zoom')
+    checkIfExistingAndRemove('.media_zoom_name')
+    let mediaElement
+    if (mediaSrc.endsWith('.mp4')) {
+        mediaElement = new Video(mediaSrc, mediaTitle);
+
+    } else if (mediaSrc.endsWith('.jpg')) {
+        mediaElement = new Image(mediaSrc, mediaTitle);
+
+    }
+    let newMediaZoom = mediaElement.renderForLightbox()
+    let newNameZoom = mediaElement.renderNameForLightbox()
+    let modalZoom = document.querySelector(".modal2")
+    modalZoom.prepend(newNameZoom)
+    modalZoom.prepend(newMediaZoom)
 }
 
 export function closeMediaModal() {
@@ -246,16 +264,6 @@ export function updateTotalNbrOfLikes() {
     totalLikes.innerHTML = '';
     totalLikes.appendChild(totalNbrOfLikesElement);
     totalLikes.appendChild(likesLogo2);
-}
-
-export function updateAfterSort(element) {
-    let index = 1
-
-    element.forEach(function (card) {
-        card.closest('.card_picture').style.order = index;
-        card.setAttribute("tabindex", index);
-        index++
-    })
 }
 
 export function addInactiveClass(element) {
