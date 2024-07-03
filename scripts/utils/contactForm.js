@@ -6,13 +6,11 @@ getPhotographers().then((photographersAndMedia) => {
 
     for (const photographer of photographersAndMedia.photographers) {
         if (isCurrentUrlMatch(currentUrl, photographer.id)) {
-            const name = document.createElement("span")
             h2Form.textContent = `Contactez moi ${photographer.name}`;
         }
     }
 });
 
-const header = document.getElementById("modal_header")
 const h2Form = document.querySelector("h2")
 const firstname = document.getElementById('firstname')
 const lastname = document.getElementById('lastname')

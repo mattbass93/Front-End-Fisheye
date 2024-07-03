@@ -2,7 +2,7 @@ import { openMediaModal } from "./functions.js"
 
 export class Media {
     constructor(type, path, title) {
-        this.type = type; // 'image' ou 'video'
+        this.type = type;
         this.path = path;
         this.title = title;
     }
@@ -40,15 +40,13 @@ export class Image extends Media {
         pictureElement.setAttribute("tabindex", 0);
         pictureElement.classList.add("picture_gallery");
         pictureElement.setAttribute("alt", this.title)
-        pictureElement.addEventListener("click", () => {
-            // this.renderForLightbox()
-            openMediaModal();
+        pictureElement.addEventListener("click", openMediaModal);
+        pictureElement.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                openMediaModal()
+            }
         });
-        // pictureElement.addEventListener('keyup', function (event) {
-        //     if (event.key === ' ' || event.key === "Enter") {
-        //         openMediaModal(this.path, this.title);
-        //     }
-        // });
+
         return pictureElement;
     }
 
@@ -82,18 +80,15 @@ export class Video extends Media {
         const videoElement = document.createElement("video");
         videoElement.src = this.path;
         videoElement.setAttribute("tabindex", 0);
-        videoElement.controls = false; // Active les contrôles de lecture vidéo
+        videoElement.controls = false;
         videoElement.classList.add("picture_gallery");
         videoElement.setAttribute("alt", this.title)
-        videoElement.addEventListener("click", () => {
-            // this.renderForLightbox()
-            openMediaModal();
+        videoElement.addEventListener("click", openMediaModal);
+        videoElement.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                openMediaModal()
+            }
         });
-        // videoElement.addEventListener('keyup', function (event) {
-        //     if (event.key === ' ' || event.key === "Enter") {
-        //         openMediaModal(this.path, this.title);
-        //     }
-        // });
         return videoElement;
     }
 

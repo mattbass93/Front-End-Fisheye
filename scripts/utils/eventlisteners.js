@@ -29,9 +29,13 @@ export function setupEventListeners() {
     // // // LISTENERS
     mediasArray.forEach((media, index) => {
         media.addEventListener('click', event => handleImageClick(event, index));
-        const imageSrc = media.src;
-        const mediaTitle = imgsNamesArray[index].textContent;
+        media.addEventListener('keyup', event => {
+            if (event.key === "Enter") {
+                handleImageClick(event, index);
+            }
+        });
     });
+
 
     nextMedia.addEventListener("click", () => {
         currentIndex++;
@@ -107,14 +111,47 @@ export function setupEventListeners() {
 
     //Sort by POPULARITY, DATE, ALPHABET
     sortImage.addEventListener("click", () => {
-        sortImage.src = "./assets/icons/down.png"
-        let sortSpanInactive = document.querySelectorAll(".inactive")
+        // Vérifie si l'image actuelle est "down.png"
+        if (sortImage.src.includes("down.png")) {
+            // Change l'image vers "up.png"
+            sortImage.src = "./assets/icons/up.png";
 
-        sortSpanInactive.forEach(function (span) {
-            span.classList.remove("inactive");
-            span.classList.add("active");
-        });
-    })
+            // Trouve tous les spans avec la classe "active"
+            let sortSpansActive = document.querySelectorAll(".active");
+
+            // Retirez la classe "active" de tous les spans
+            sortSpansActive.forEach(span => {
+                span.classList.remove("active");
+                span.classList.add("inactive");
+
+
+
+            });
+            sortSpansActive = document.querySelectorAll(".active");
+            let sortSpansInactive = document.querySelectorAll(".inactive");
+
+            sortSpansInactive[0].classList.add("active");
+
+            // Ajoute la classe "inactive" seulement au premier élément trouvé
+            // if (sortSpansActive.length > 0) {
+            //     sortSpansActive[0].classList.add("active");
+            // }
+
+        } else {
+            // Change l'image vers "down.png"
+            sortImage.src = "./assets/icons/down.png";
+
+            // Trouve tous les spans avec la classe "inactive"
+            let sortSpansInactive = document.querySelectorAll(".inactive");
+
+            // Pour chaque span inactive, retire la classe "inactive" et ajoute la classe "active"
+            sortSpansInactive.forEach(span => {
+                span.classList.remove("inactive");
+                span.classList.add("active");
+            });
+        }
+    });
+
 
     sortImage.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {

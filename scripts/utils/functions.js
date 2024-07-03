@@ -127,11 +127,11 @@ export function displayMediaItem(mediaItem, photographersAndMedia) {
             checkIfExistingAndRemove(".media_zoom")
             checkIfExistingAndRemove(".media_zoom_name")
 
-            const modal2 = document.querySelector('.modal2')
+            const lightbox = document.querySelector('.lightbox')
             const mediaZoom = mediaElement.renderForLightbox();
             const mediaZoomName = mediaElement.renderNameForLightbox()
-            modal2.prepend(mediaZoomName)
-            modal2.prepend(mediaZoom)
+            lightbox.prepend(mediaZoomName)
+            lightbox.prepend(mediaZoom)
         })
 
         mediaElementHtml.addEventListener("keyup", function (event) {
@@ -139,11 +139,11 @@ export function displayMediaItem(mediaItem, photographersAndMedia) {
                 checkIfExistingAndRemove(".media_zoom")
                 checkIfExistingAndRemove(".media_zoom_name")
 
-                const modal2 = document.querySelector('.modal2')
+                const lightbox = document.querySelector('.lightbox')
                 const mediaZoom = mediaElement.renderForLightbox();
                 const mediaZoomName = mediaElement.renderNameForLightbox()
-                modal2.prepend(mediaZoomName)
-                modal2.prepend(mediaZoom)
+                lightbox.prepend(mediaZoomName)
+                lightbox.prepend(mediaZoom)
             }
 
         })
@@ -208,12 +208,13 @@ export function getFolderName(folderName) {
 
 export function openMediaModal() {
     const mediaModal = document.querySelector(".media_modal");
+    mediaModal.setAttribute("tabindex", 0)
+    const lightbox = document.querySelector('.lightbox')
+
+    lightbox.focus()
     mediaModal.style.display = "block";
 
 }
-
-
-
 
 export function swipeMedia(mediaSrc, mediaTitle) {
     checkIfExistingAndRemove('.media_zoom')
@@ -228,9 +229,9 @@ export function swipeMedia(mediaSrc, mediaTitle) {
     }
     let newMediaZoom = mediaElement.renderForLightbox()
     let newNameZoom = mediaElement.renderNameForLightbox()
-    let modalZoom = document.querySelector(".modal2")
-    modalZoom.prepend(newNameZoom)
-    modalZoom.prepend(newMediaZoom)
+    let lightbox = document.querySelector(".lightbox")
+    lightbox.prepend(newNameZoom)
+    lightbox.prepend(newMediaZoom)
 }
 
 export function closeMediaModal() {
