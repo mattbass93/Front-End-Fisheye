@@ -26,8 +26,8 @@
       </div>
 
       <div class="tri">
-        <span tabindex="0" class="">Trier par</span>       
-          <button class="sort_button">   
+        <label tabindex="0" for="Order_by" >Trier par</label>       
+          <button class="sort_button" id="Order_by" role="listbox">   
               <span tabindex="0" class="sort_section active link" id="popularity">Popularité</span>
               <span tabindex="0" class="sort_section inactive link" id="date">Date</span>
               <span tabindex="0" class="sort_section inactive link" id="alphabet">Titre</span>
@@ -60,11 +60,11 @@
 						<input id="email" type="email" name="email"/>
 					</div>
           <div>
-						<label tabindex="0" for="message">Votre message</label>
-						<input id="message" type="text" name="message"></input>
+						<label tabindex="0" for="your_message">Votre message</label>
+						<input id="your_message" type="text" name="your_message"></input>
 					</div>
-          <button class="contact_button" type="submit">Envoyer</button>
-          <img tabindex="0" class="close_modal"  src="assets/icons/close.svg" />      
+          <button class="contact_button" type="submit" aria-label="Send">Envoyer</button>
+          <img tabindex="0" class="close_modal" src="assets/icons/close.svg" aria-label="Close Contact form" />      
 				</form>
 			</div>
 		</div>

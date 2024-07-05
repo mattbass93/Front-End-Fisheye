@@ -39,7 +39,7 @@ export class Image extends Media {
         pictureElement.src = this.path;
         pictureElement.setAttribute("tabindex", 0);
         pictureElement.classList.add("picture_gallery");
-        pictureElement.setAttribute("alt", this.title)
+        pictureElement.setAttribute("alt", `${this.title} closeup view`)
         pictureElement.addEventListener("click", openMediaModal);
         pictureElement.addEventListener("keyup", function (event) {
             if (event.key === "Enter") {
@@ -82,7 +82,7 @@ export class Video extends Media {
         videoElement.setAttribute("tabindex", 0);
         videoElement.controls = false;
         videoElement.classList.add("picture_gallery");
-        videoElement.setAttribute("alt", this.title)
+        videoElement.setAttribute("alt", `${this.title} closeup view`)
         videoElement.addEventListener("click", openMediaModal);
         videoElement.addEventListener("keyup", function (event) {
             if (event.key === "Enter") {

@@ -10,16 +10,32 @@ export function setupEventListeners() {
     const popularityFilter = document.getElementById('popularity')
     const dateFilter = document.getElementById('date')
     const alphabetFilter = document.getElementById('alphabet')
-    const medias = document.querySelectorAll(".picture_gallery")
-    const imgsNames = document.querySelectorAll(".picture_title")
-    const mediasArray = Array.from(medias)
-    const imgsNamesArray = Array.from(imgsNames)
+    let medias = document.querySelectorAll(".picture_gallery")
+    let imgsNames = document.querySelectorAll(".picture_title")
+    let mediasArray = Array.from(medias)
+    let imgsNamesArray = Array.from(imgsNames)
     let currentIndex = 0;
 
+
+    function updateMediasAndTitles() {
+        // Récupération des nouveaux éléments média et titres
+        medias = document.querySelectorAll(".picture_gallery");
+        imgsNames = document.querySelectorAll(".picture_title");
+
+        // Conversion des collections NodeList en tableaux
+        mediasArray = Array.from(medias);
+        imgsNamesArray = Array.from(imgsNames);
+
+        // Réinitialisation de currentIndex
+        currentIndex = 0;
+
+        addListenerMedias(mediasArray)
+    }
 
 
     function handleImageClick(event, index) {
         currentIndex = index;
+        console.log(currentIndex)
         const imageSrc = mediasArray[currentIndex].src;
         const mediaTitle = imgsNamesArray[currentIndex].textContent;
         swipeMedia(imageSrc, mediaTitle);
@@ -27,14 +43,18 @@ export function setupEventListeners() {
 
 
     // // // LISTENERS
-    mediasArray.forEach((media, index) => {
-        media.addEventListener('click', event => handleImageClick(event, index));
-        media.addEventListener('keyup', event => {
-            if (event.key === "Enter") {
-                handleImageClick(event, index);
-            }
+    function addListenerMedias(mediasArray) {
+        mediasArray.forEach((media, index) => {
+            media.addEventListener('click', event => handleImageClick(event, index));
+            media.addEventListener('keyup', event => {
+                if (event.key === "Enter") {
+                    handleImageClick(event, index);
+                }
+            });
         });
-    });
+    }
+
+    addListenerMedias(mediasArray)
 
 
     nextMedia.addEventListener("click", () => {
@@ -70,13 +90,12 @@ export function setupEventListeners() {
 
     previousMedia.addEventListener("click", () => {
         currentIndex--;
-        if (currentIndex < mediasArray.length) {
+        if (currentIndex >= 0 && currentIndex < mediasArray.length) {
             const imageSrc = mediasArray[currentIndex].src;
             const mediaTitle = imgsNamesArray[currentIndex].textContent;
             swipeMedia(imageSrc, mediaTitle);
-        }
-        else {
-            currentIndex = 0
+        } else {
+            currentIndex = mediasArray.length - 1; // Passer au dernier élément
             const imageSrc = mediasArray[currentIndex].src;
             const mediaTitle = imgsNamesArray[currentIndex].textContent;
             swipeMedia(imageSrc, mediaTitle);
@@ -85,19 +104,19 @@ export function setupEventListeners() {
     previousMedia.addEventListener('keyup', function (event) {
         if (event.key === "Enter") {
             currentIndex--;
-            if (currentIndex < mediasArray.length) {
+            if (currentIndex >= 0 && currentIndex < mediasArray.length) {
                 const imageSrc = mediasArray[currentIndex].src;
                 const mediaTitle = imgsNamesArray[currentIndex].textContent;
                 swipeMedia(imageSrc, mediaTitle);
-            }
-            else {
-                currentIndex = 0
+            } else {
+                currentIndex = mediasArray.length - 1; // Passer au dernier élément
                 const imageSrc = mediasArray[currentIndex].src;
                 const mediaTitle = imgsNamesArray[currentIndex].textContent;
                 swipeMedia(imageSrc, mediaTitle);
             }
         }
     });
+
 
 
     spanCloseMediaZoom.addEventListener("click", () => {
@@ -109,10 +128,14 @@ export function setupEventListeners() {
         }
     });
 
+
+
     //Sort by POPULARITY, DATE, ALPHABET
-    sortImage.addEventListener("click", () => {
+    sortImage.addEventListener("click", (e) => {
         // Vérifie si l'image actuelle est "down.png"
+        console.log(e.target)
         if (sortImage.src.includes("down.png")) {
+            console.log('bjr')
             // Change l'image vers "up.png"
             sortImage.src = "./assets/icons/up.png";
 
@@ -129,6 +152,8 @@ export function setupEventListeners() {
             });
             sortSpansActive = document.querySelectorAll(".active");
             let sortSpansInactive = document.querySelectorAll(".inactive");
+            console.log(sortSpansInactive[0])
+            sortSpansInactive[0].classList.remove("inactive");
 
             sortSpansInactive[0].classList.add("active");
 
@@ -183,6 +208,9 @@ export function setupEventListeners() {
         sortImage.src = "./assets/icons/up.png"
         popularityFilter.style.order = "-1"
 
+
+        updateMediasAndTitles();
+        console.log(mediasArray)
     });
 
     popularityFilter.addEventListener('keyup', function (event) {
@@ -231,6 +259,7 @@ export function setupEventListeners() {
         addInactiveClass(popularityFilter);
         sortImage.src = "./assets/icons/up.png";
         dateFilter.style.order = "-1";
+
     });
 
     dateFilter.addEventListener('keyup', function (event) {

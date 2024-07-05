@@ -7,6 +7,7 @@ getPhotographers().then((photographersAndMedia) => {
     for (const photographer of photographersAndMedia.photographers) {
         if (isCurrentUrlMatch(currentUrl, photographer.id)) {
             h2Form.textContent = `Contactez moi ${photographer.name}`;
+            h2Form.setAttribute("aria-label", `Contact me ${photographer.name}`)
         }
     }
 });

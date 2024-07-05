@@ -20,6 +20,7 @@ export function photographerTemplate(data) {
         const article = document.createElement('article');
         const img = document.createElement('img');
         img.setAttribute("src", picture)
+        img.setAttribute("alt", "")
         const h2 = document.createElement('h2');
         h2.textContent = name;
         h2.setAttribute("alt", name)
@@ -103,7 +104,7 @@ export function checkIfExistingAndRemove(element) {
 
 export function displayMediaItem(mediaItem, photographersAndMedia) {
     const photographGallery = document.querySelector('.photographer_gallery');
-    const cardPicture = createElementWithClass("div", "card_picture");
+    const cardPicture = createElementWithClass("article", "card_picture");
     const associatedPhotographer = photographersAndMedia.photographers.find(photographer => photographer.id === mediaItem.photographerId);
     const picturePath = `Sample Photos/${getFolderName(associatedPhotographer.name)}/${mediaItem.image}`;
     const videoPath = `Sample Photos/${getFolderName(associatedPhotographer.name)}/${mediaItem.video}`;
@@ -210,9 +211,10 @@ export function openMediaModal() {
     const mediaModal = document.querySelector(".media_modal");
     mediaModal.setAttribute("tabindex", 0)
     const lightbox = document.querySelector('.lightbox')
+    mediaModal.style.display = "block";
+
 
     lightbox.focus()
-    mediaModal.style.display = "block";
 
 }
 

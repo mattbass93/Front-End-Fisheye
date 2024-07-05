@@ -160,7 +160,7 @@ form input {
     border-radius: 5px;
 }
 
-#message {
+#your_message {
     height: 170px;
     margin-bottom: 20px;
 }
@@ -294,6 +294,11 @@ form input {
     height: 300px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.picture_gallery:hover,
+.likes_logo:hover {
+    cursor: pointer;
 }
 
 .card_picture {
