@@ -208,9 +208,8 @@ export function setupEventListeners() {
         sortImage.src = "./assets/icons/up.png"
         popularityFilter.style.order = "-1"
 
-
         updateMediasAndTitles();
-        console.log(mediasArray)
+
     });
 
     popularityFilter.addEventListener('keyup', function (event) {
@@ -234,6 +233,8 @@ export function setupEventListeners() {
             addInactiveClass(dateFilter)
             sortImage.src = "./assets/icons/up.png"
             popularityFilter.style.order = "-1"
+
+            updateMediasAndTitles();
         }
     })
 
@@ -260,6 +261,7 @@ export function setupEventListeners() {
         sortImage.src = "./assets/icons/up.png";
         dateFilter.style.order = "-1";
 
+        updateMediasAndTitles();
     });
 
     dateFilter.addEventListener('keyup', function (event) {
@@ -285,6 +287,8 @@ export function setupEventListeners() {
             addInactiveClass(popularityFilter);
             sortImage.src = "./assets/icons/up.png";
             dateFilter.style.order = "-1";
+
+            updateMediasAndTitles();
         }
     });
 
@@ -304,6 +308,8 @@ export function setupEventListeners() {
         addInactiveClass(popularityFilter);
         sortImage.src = "./assets/icons/up.png";
         alphabetFilter.style.order = "-1";
+
+        updateMediasAndTitles();
     });
 
     alphabetFilter.addEventListener('keyup', function (event) {
@@ -323,6 +329,8 @@ export function setupEventListeners() {
             addInactiveClass(popularityFilter);
             sortImage.src = "./assets/icons/up.png";
             alphabetFilter.style.order = "-1";
+
+            updateMediasAndTitles();
         }
     })
 
