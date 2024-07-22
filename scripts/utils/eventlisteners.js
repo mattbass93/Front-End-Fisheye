@@ -18,15 +18,12 @@ export function setupEventListeners() {
 
 
     function updateMediasAndTitles() {
-        // Récupération des nouveaux éléments média et titres
         medias = document.querySelectorAll(".picture_gallery");
         imgsNames = document.querySelectorAll(".picture_title");
 
-        // Conversion des collections NodeList en tableaux
         mediasArray = Array.from(medias);
         imgsNamesArray = Array.from(imgsNames);
 
-        // Réinitialisation de currentIndex
         currentIndex = 0;
 
         addListenerMedias(mediasArray)
@@ -95,7 +92,7 @@ export function setupEventListeners() {
             const mediaTitle = imgsNamesArray[currentIndex].textContent;
             swipeMedia(imageSrc, mediaTitle);
         } else {
-            currentIndex = mediasArray.length - 1; // Passer au dernier élément
+            currentIndex = mediasArray.length - 1;
             const imageSrc = mediasArray[currentIndex].src;
             const mediaTitle = imgsNamesArray[currentIndex].textContent;
             swipeMedia(imageSrc, mediaTitle);
@@ -109,7 +106,7 @@ export function setupEventListeners() {
                 const mediaTitle = imgsNamesArray[currentIndex].textContent;
                 swipeMedia(imageSrc, mediaTitle);
             } else {
-                currentIndex = mediasArray.length - 1; // Passer au dernier élément
+                currentIndex = mediasArray.length - 1;
                 const imageSrc = mediasArray[currentIndex].src;
                 const mediaTitle = imgsNamesArray[currentIndex].textContent;
                 swipeMedia(imageSrc, mediaTitle);
@@ -131,45 +128,24 @@ export function setupEventListeners() {
 
 
     //Sort by POPULARITY, DATE, ALPHABET
-    sortImage.addEventListener("click", (e) => {
-        // Vérifie si l'image actuelle est "down.png"
-        console.log(e.target)
+    sortImage.addEventListener("click", () => {
         if (sortImage.src.includes("down.png")) {
-            console.log('bjr')
-            // Change l'image vers "up.png"
             sortImage.src = "./assets/icons/up.png";
 
-            // Trouve tous les spans avec la classe "active"
             let sortSpansActive = document.querySelectorAll(".active");
 
-            // Retirez la classe "active" de tous les spans
             sortSpansActive.forEach(span => {
                 span.classList.remove("active");
                 span.classList.add("inactive");
-
-
-
             });
             sortSpansActive = document.querySelectorAll(".active");
             let sortSpansInactive = document.querySelectorAll(".inactive");
-            console.log(sortSpansInactive[0])
             sortSpansInactive[0].classList.remove("inactive");
-
             sortSpansInactive[0].classList.add("active");
 
-            // Ajoute la classe "inactive" seulement au premier élément trouvé
-            // if (sortSpansActive.length > 0) {
-            //     sortSpansActive[0].classList.add("active");
-            // }
-
         } else {
-            // Change l'image vers "down.png"
             sortImage.src = "./assets/icons/down.png";
-
-            // Trouve tous les spans avec la classe "inactive"
             let sortSpansInactive = document.querySelectorAll(".inactive");
-
-            // Pour chaque span inactive, retire la classe "inactive" et ajoute la classe "active"
             sortSpansInactive.forEach(span => {
                 span.classList.remove("inactive");
                 span.classList.add("active");
@@ -180,13 +156,28 @@ export function setupEventListeners() {
 
     sortImage.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
-            sortImage.src = "./assets/icons/down.png"
-            let sortSpanInactive = document.querySelectorAll(".inactive")
+            if (sortImage.src.includes("down.png")) {
+                sortImage.src = "./assets/icons/up.png";
 
-            sortSpanInactive.forEach(function (span) {
-                span.classList.remove("inactive");
-                span.classList.add("active");
-            });
+                let sortSpansActive = document.querySelectorAll(".active");
+
+                sortSpansActive.forEach(span => {
+                    span.classList.remove("active");
+                    span.classList.add("inactive");
+                });
+                sortSpansActive = document.querySelectorAll(".active");
+                let sortSpansInactive = document.querySelectorAll(".inactive");
+                sortSpansInactive[0].classList.remove("inactive");
+                sortSpansInactive[0].classList.add("active");
+
+            } else {
+                sortImage.src = "./assets/icons/down.png";
+                let sortSpansInactive = document.querySelectorAll(".inactive");
+                sortSpansInactive.forEach(span => {
+                    span.classList.remove("inactive");
+                    span.classList.add("active");
+                });
+            }
         }
 
     })
@@ -216,17 +207,11 @@ export function setupEventListeners() {
         if (event.key === "Enter") {
             const nbrOfLikesPerMedia = document.querySelectorAll('.nbrOfLikes');
             const nbrOfLikesPerMediaArray = Array.from(nbrOfLikesPerMedia).sort((a, b) => parseInt(a.textContent) - parseInt(b.textContent));
-
-            // Sélectionnez le conteneur où les éléments doivent être insérés
             const container = document.querySelector('.photographer_gallery');
-
-            // Videz le conteneur pour commencer à y insérer les éléments triés
             container.innerHTML = "";
-
-            // Insérez chaque élément trié dans le conteneur
             nbrOfLikesPerMediaArray.forEach(nbrOfLikes => {
-                const cardPicture = nbrOfLikes.closest('.card_picture'); // Trouvez le parent.card_picture de chaque titre
-                container.insertBefore(cardPicture, container.firstChild); // Insérez le parent.card_picture à la première position libre
+                const cardPicture = nbrOfLikes.closest('.card_picture');
+                container.insertBefore(cardPicture, container.firstChild);
             });
 
             addInactiveClass(alphabetFilter)

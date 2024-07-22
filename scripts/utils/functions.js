@@ -212,8 +212,6 @@ export function openMediaModal() {
     mediaModal.setAttribute("tabindex", 0)
     const lightbox = document.querySelector('.lightbox')
     mediaModal.style.display = "block";
-
-
     lightbox.focus()
 
 }
