@@ -32,7 +32,6 @@ export function setupEventListeners() {
 
     function handleImageClick(event, index) {
         currentIndex = index;
-        console.log(currentIndex)
         const imageSrc = mediasArray[currentIndex].src;
         const mediaTitle = imgsNamesArray[currentIndex].textContent;
         swipeMedia(imageSrc, mediaTitle);
